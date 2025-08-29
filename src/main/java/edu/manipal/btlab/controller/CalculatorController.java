@@ -27,5 +27,4 @@ public class CalculatorController {
     @GetMapping("/rates/{productId}")
     public ResponseEntity<?> getCurrentInterestRates(@PathVariable Long productId) {return null;}
 }
-{
-}
+
