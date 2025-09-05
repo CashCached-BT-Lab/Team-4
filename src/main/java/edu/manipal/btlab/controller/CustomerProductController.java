@@ -29,4 +29,3 @@ public class CustomerProductController {
     @GetMapping("/categories")
     public ResponseEntity<?> getProductCategories() {return null;}
 }
-}
