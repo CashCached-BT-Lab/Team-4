@@ -23,10 +23,13 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Column(length = 10)
+    @Column(length = 10, nullable = false)
     private String currency;
 
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
+
+    @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime updatedAt;
 
     // Relationships

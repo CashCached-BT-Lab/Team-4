@@ -1,42 +1,16 @@
-package edu.manipal.btlab.entity;
-
-import jakarta.persistence.*;
+package edu.manipal.btlab.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "product_term_profile")
-public class ProductTermProfile {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductTermProfileDTO {
     private Long id;
-
-    @Column(nullable = false)
     private Integer minTermDays;
-
-    @Column(nullable = false)
     private Integer maxTermDays;
-
-    @Column(precision = 18, scale = 2, nullable = false)
     private BigDecimal minAmount;
-
-    @Column(precision = 18, scale = 2, nullable = false)
     private BigDecimal maxAmount;
-
-    @Enumerated(EnumType.STRING)
-    private CompoundingFrequency compoundingFrequency;
-
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private String compoundingFrequency;
     private LocalDateTime createdAt;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
-
-    public enum CompoundingFrequency {
-        DAILY, MONTHLY, QUARTERLY, YEARLY
-    }
 
     public Long getId() {
         return id;
@@ -78,11 +52,11 @@ public class ProductTermProfile {
         this.maxAmount = maxAmount;
     }
 
-    public CompoundingFrequency getCompoundingFrequency() {
+    public String getCompoundingFrequency() {
         return compoundingFrequency;
     }
 
-    public void setCompoundingFrequency(CompoundingFrequency compoundingFrequency) {
+    public void setCompoundingFrequency(String compoundingFrequency) {
         this.compoundingFrequency = compoundingFrequency;
     }
 
@@ -92,13 +66,5 @@ public class ProductTermProfile {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 }

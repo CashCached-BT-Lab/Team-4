@@ -1,46 +1,18 @@
-package edu.manipal.btlab.entity;
-
-import jakarta.persistence.*;
+package edu.manipal.btlab.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "rate_matrix")
-public class RateMatrix {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RateMatrixDTO {
     private Long id;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private CustomerType customerType;
-
-    @Column(nullable = false)
+    private String customerType;
     private Integer termFromDays;
-
-    @Column(nullable = false)
     private Integer termToDays;
-
-    @Column(precision = 5, scale = 2, nullable = false)
     private BigDecimal interestRate;
-
-    @Column(nullable = false)
     private LocalDate effectiveFrom;
-
     private LocalDate effectiveTo;
-
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
-
-    public enum CustomerType {
-        RETAIL, CORPORATE
-    }
 
     public Long getId() {
         return id;
@@ -50,11 +22,11 @@ public class RateMatrix {
         this.id = id;
     }
 
-    public CustomerType getCustomerType() {
+    public String getCustomerType() {
         return customerType;
     }
 
-    public void setCustomerType(CustomerType customerType) {
+    public void setCustomerType(String customerType) {
         this.customerType = customerType;
     }
 
@@ -104,13 +76,5 @@ public class RateMatrix {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 }

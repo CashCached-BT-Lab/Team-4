@@ -12,12 +12,15 @@ public class ProductAuditLog {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Action action;
 
     @Column(columnDefinition = "JSON")
     private String details;
 
     private String createdBy;
+
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
     @ManyToOne

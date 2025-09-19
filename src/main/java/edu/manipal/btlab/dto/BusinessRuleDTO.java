@@ -1,34 +1,15 @@
-package edu.manipal.btlab.entity;
-
-import jakarta.persistence.*;
+package edu.manipal.btlab.dto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "business_rule")
-public class BusinessRule {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BusinessRuleDTO {
     private Long id;
-
-    @Column(columnDefinition = "JSON", nullable = false)
+    private Long ruleTypeId;
     private String ruleValue;
-
-    @Column(nullable = false)
     private LocalDate effectiveFrom;
     private LocalDate effectiveTo;
-
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
-
-    @ManyToOne
-    @JoinColumn(name = "rule_type_id", nullable = false)
-    private BusinessRuleType ruleType;
 
     public Long getId() {
         return id;
@@ -36,6 +17,14 @@ public class BusinessRule {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getRuleTypeId() {
+        return ruleTypeId;
+    }
+
+    public void setRuleTypeId(Long ruleTypeId) {
+        this.ruleTypeId = ruleTypeId;
     }
 
     public String getRuleValue() {
@@ -68,21 +57,5 @@ public class BusinessRule {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public BusinessRuleType getRuleType() {
-        return ruleType;
-    }
-
-    public void setRuleType(BusinessRuleType ruleType) {
-        this.ruleType = ruleType;
     }
 }
