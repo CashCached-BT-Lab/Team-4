@@ -46,7 +46,7 @@ jobs:
           
       - name: Build with Maven & Test
         env:
-            SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/btlab?allowPublicKeyRetrieval=true&useSSL=false
+            SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/btlab?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
             SPRING_DATASOURCE_USERNAME: root
             SPRING_DATASOURCE_PASSWORD: root
         run: mvn -B package --file pom.xml
