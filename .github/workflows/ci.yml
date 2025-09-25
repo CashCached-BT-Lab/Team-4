@@ -43,6 +43,18 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+
+      - name: Wait for MySQL
+        run: |
+          echo "Waiting for MySQL..."
+          for i in {1..30}; do
+            if mysql -hmysql -uroot -proot -e "SELECT 1;" &> /dev/null; then
+              echo "MySQL is ready!"
+              break
+            fi
+            echo "Still waiting..."
+            sleep 5
+          done
           
       - name: Build with Maven & Test
         env:
