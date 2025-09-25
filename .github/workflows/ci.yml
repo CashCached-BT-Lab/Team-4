@@ -47,20 +47,29 @@ jobs:
       - name: Install MySQL Client
         run: sudo apt-get install -y mysql-client
 
-      - name: Wait for MySQL
+      - name: Wait for MySQL and Verify Hostname
         run: |
-          echo "Waiting for MySQL to be fully ready..."
-          while ! mysqladmin ping -h "127.0.0.1" -uroot -proot --silent; do
-            echo "Still waiting..."
-            sleep 3
-          done
-          echo "MySQL is ready and accepting connections!"
+          echo "Pinging database service 'mysql'..."
           
-          mysql -h "127.0.0.1" -uroot -proot -e "SHOW DATABASES;"
+          # Use the service name 'mysql' exactly as the Spring app does
+          max_retries=15
+          for i in $(seq 1 $max_retries); do
+            # The client needs to connect to the hostname 'mysql'
+            if mysql -h mysql -uroot -proot -e "SELECT 1;" &> /dev/null; then
+              echo "✅ MySQL is ready and reachable via 'mysql' hostname!"
+              break
+            fi
+            echo "Attempt $i/$max_retries: Still waiting for MySQL on hostname 'mysql'..."
+            sleep 4
+            if [ $i -eq $max_retries ]; then
+              echo "❌ Failed to connect to MySQL on hostname 'mysql' after $max_retries attempts."
+              exit 1
+            fi
+          done
           
       - name: Build with Maven & Test
         env:
-            SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/btlab?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+            SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/btlab?useSSL=false
             SPRING_DATASOURCE_USERNAME: root
             SPRING_DATASOURCE_PASSWORD: root
         run: mvn -B package --file pom.xml
