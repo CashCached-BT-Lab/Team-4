@@ -55,14 +55,14 @@ jobs:
           max_retries=15
           for i in $(seq 1 $max_retries); do
             # The client needs to connect to the hostname 'mysql'
-            if mysql -h mysql -uroot -proot -e "SELECT 1;" &> /dev/null; then
-              echo "✅ MySQL is ready and reachable via 'mysql' hostname!"
+            if mysql -h 127.0.0.1 -uroot -proot -e "SELECT 1;" &> /dev/null; then
+              echo "✅ MySQL is ready and reachable via 127.0.0.1:3306!"
               break
             fi
-            echo "Attempt $i/$max_retries: Still waiting for MySQL on hostname 'mysql'..."
+            echo "Attempt $i/$max_retries: Still waiting for MySQL on 127.0.0.1 ..."
             sleep 4
             if [ $i -eq $max_retries ]; then
-              echo "❌ Failed to connect to MySQL on hostname 'mysql' after $max_retries attempts."
+              echo "❌ Failed to connect to MySQL on 127.0.0.1 after $max_retries attempts."
               exit 1
             fi
           done
