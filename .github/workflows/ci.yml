@@ -28,7 +28,7 @@ jobs:
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -h mysql --silent"
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -49,15 +49,14 @@ jobs:
 
       - name: Wait for MySQL
         run: |
-          echo "Waiting for MySQL..."
-          for i in {1..30}; do
-            if mysql -hmysql -uroot -proot -e "SELECT 1;" &> /dev/null; then
-              echo "MySQL is ready!"
-              break
-            fi
+          echo "Waiting for MySQL to be fully ready..."
+          while ! mysqladmin ping -h "127.0.0.1" -uroot -proot --silent; do
             echo "Still waiting..."
-            sleep 5
+            sleep 3
           done
+          echo "MySQL is ready and accepting connections!"
+          
+          mysql -h "127.0.0.1" -uroot -proot -e "SHOW DATABASES;"
           
       - name: Build with Maven & Test
         env:
