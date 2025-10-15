@@ -3,6 +3,7 @@ CI Pipeline Status - ![CI](https://github.com/CashCached-BT-Lab/Team-4/actions/w
 # Team-4
 Repo for Product &amp; Pricing Module ( Team 4). Don't push to main, create branches for any feature changes/development!
 
+Admin UI Repo - https://github.com/voidMegh/FDAdminUI
 
 ERD For Reference :-
 
