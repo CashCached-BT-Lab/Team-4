@@ -1,18 +1,36 @@
 package edu.manipal.btlab.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import edu.manipal.btlab.entity.RateMatrix;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class RateMatrixDTO {
     private Long id;
-    private String customerType;
+    private RateMatrix.CustomerType customerType;
     private Integer termFromDays;
     private Integer termToDays;
     private BigDecimal interestRate;
-    private LocalDate effectiveFrom;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd") private LocalDate effectiveFrom;
     private LocalDate effectiveTo;
     private LocalDateTime createdAt;
+
+    public RateMatrixDTO() {
+    }
+
+    public RateMatrixDTO(Long id, RateMatrix.CustomerType customerType, Integer termFromDays, Integer termToDays, BigDecimal interestRate, LocalDate effectiveFrom, LocalDate effectiveTo, LocalDateTime createdAt) {
+        this.id = id;
+        this.customerType = customerType;
+        this.termFromDays = termFromDays;
+        this.termToDays = termToDays;
+        this.interestRate = interestRate;
+        this.effectiveFrom = effectiveFrom;
+        this.effectiveTo = effectiveTo;
+        this.createdAt = createdAt;
+    }
 
     public Long getId() {
         return id;
@@ -22,11 +40,11 @@ public class RateMatrixDTO {
         this.id = id;
     }
 
-    public String getCustomerType() {
+    public RateMatrix.CustomerType getCustomerType() {
         return customerType;
     }
 
-    public void setCustomerType(String customerType) {
+    public void setCustomerType(RateMatrix.CustomerType customerType) {
         this.customerType = customerType;
     }
 

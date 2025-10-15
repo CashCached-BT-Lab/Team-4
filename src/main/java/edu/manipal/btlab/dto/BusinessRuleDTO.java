@@ -1,15 +1,30 @@
 package edu.manipal.btlab.dto;
 
+import edu.manipal.btlab.entity.BusinessRuleType;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class BusinessRuleDTO {
     private Long id;
-    private Long ruleTypeId;
+    private BusinessRuleType ruleTypeId;
     private String ruleValue;
     private LocalDate effectiveFrom;
     private LocalDate effectiveTo;
     private LocalDateTime createdAt;
+
+    public BusinessRuleDTO() {
+
+    }
+
+    public BusinessRuleDTO(Long id, BusinessRuleType ruleTypeId, String ruleValue, LocalDate effectiveFrom, LocalDate effectiveTo, LocalDateTime createdAt) {
+        this.id = id;
+        this.ruleTypeId = ruleTypeId;
+        this.ruleValue = ruleValue;
+        this.effectiveFrom = effectiveFrom;
+        this.effectiveTo = effectiveTo;
+        this.createdAt = createdAt;
+    }
 
     public Long getId() {
         return id;
@@ -19,11 +34,11 @@ public class BusinessRuleDTO {
         this.id = id;
     }
 
-    public Long getRuleTypeId() {
+    public BusinessRuleType getRuleTypeId() {
         return ruleTypeId;
     }
 
-    public void setRuleTypeId(Long ruleTypeId) {
+    public void setRuleTypeId(BusinessRuleType ruleTypeId) {
         this.ruleTypeId = ruleTypeId;
     }
 

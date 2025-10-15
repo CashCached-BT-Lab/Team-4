@@ -1,5 +1,6 @@
 package edu.manipal.btlab.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -24,9 +25,10 @@ public class BusinessRule {
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
+    @JsonIgnore
     private Product product;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "rule_type_id", nullable = false)
     private BusinessRuleType ruleType;
 

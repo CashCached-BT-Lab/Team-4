@@ -17,6 +17,7 @@ public class ProductDetailsDTO {
     private List<RateMatrixDTO> rateMatrices;
     private List<BusinessRuleDTO> businessRules;
 
+
     public Long getId() {
         return id;
     }

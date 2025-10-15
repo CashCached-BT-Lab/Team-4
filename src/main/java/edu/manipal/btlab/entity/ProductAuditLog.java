@@ -1,5 +1,6 @@
 package edu.manipal.btlab.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -25,10 +26,11 @@ public class ProductAuditLog {
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
+    @JsonIgnore
     private Product product;
 
     public enum Action {
-        CREATE, UPDATE, DELETE
+        CREATE, UPDATE, DELETE, CHANGE_STATUS
     }
 
     public Long getId() {

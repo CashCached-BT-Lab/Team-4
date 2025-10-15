@@ -1,5 +1,7 @@
 package edu.manipal.btlab.dto;
 
+import edu.manipal.btlab.entity.ProductTermProfile;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -9,8 +11,21 @@ public class ProductTermProfileDTO {
     private Integer maxTermDays;
     private BigDecimal minAmount;
     private BigDecimal maxAmount;
-    private String compoundingFrequency;
+    private ProductTermProfile.CompoundingFrequency compoundingFrequency;
     private LocalDateTime createdAt;
+
+    public ProductTermProfileDTO() {
+    }
+
+    public ProductTermProfileDTO(Long id, Integer minTermDays, Integer maxTermDays, BigDecimal minAmount, BigDecimal maxAmount, ProductTermProfile.CompoundingFrequency compoundingFrequency, LocalDateTime createdAt) {
+        this.id = id;
+        this.minTermDays = minTermDays;
+        this.maxTermDays = maxTermDays;
+        this.minAmount = minAmount;
+        this.maxAmount = maxAmount;
+        this.compoundingFrequency = compoundingFrequency;
+        this.createdAt = createdAt;
+    }
 
     public Long getId() {
         return id;
@@ -52,11 +67,11 @@ public class ProductTermProfileDTO {
         this.maxAmount = maxAmount;
     }
 
-    public String getCompoundingFrequency() {
+    public ProductTermProfile.CompoundingFrequency getCompoundingFrequency() {
         return compoundingFrequency;
     }
 
-    public void setCompoundingFrequency(String compoundingFrequency) {
+    public void setCompoundingFrequency(ProductTermProfile.CompoundingFrequency compoundingFrequency) {
         this.compoundingFrequency = compoundingFrequency;
     }
 

@@ -1,5 +1,6 @@
 package edu.manipal.btlab.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -32,6 +33,7 @@ public class ProductTermProfile {
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
+    @JsonIgnore
     private Product product;
 
     public enum CompoundingFrequency {

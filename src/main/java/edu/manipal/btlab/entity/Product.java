@@ -46,7 +46,7 @@ public class Product {
     private List<BusinessRule> businessRules;
 
     public enum Status {
-        ACTIVE, INACTIVE, SUSPENDED
+        ACTIVE, INACTIVE, SUSPENDED, DRAFT
     }
 
     public LocalDateTime getUpdatedAt() {
