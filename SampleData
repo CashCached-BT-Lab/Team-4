@@ -1,0 +1,38 @@
+Sample Data for Testing - 
+
+INSERT INTO business_rule_type (id, code, name, description) VALUES
+(1, 'MIN_BAL', 'Minimum Balance Rule', 'Defines the minimum balance required'),
+(2, 'EARLY_WD', 'Early Withdrawal Rule', 'Penalty for premature withdrawal'),
+(3, 'MAX_INV', 'Maximum Investment Rule', 'Defines the maximum amount allowed per customer');
+
+-- Insert into product
+INSERT INTO product (id, product_code, product_name, currency, description, status, created_at, updated_at) VALUES
+(1, 'FD001', 'Fixed Deposit Standard', 'INR', 'Standard fixed deposit product', 'ACTIVE', NOW(), NOW()),
+(2, 'FD002', 'Senior Citizen FD', 'INR', 'Higher rate FD for senior citizens', 'ACTIVE', NOW(), NOW());
+
+-- Insert into product_term_profile
+INSERT INTO product_term_profile (id, product_id, min_amount, max_amount, min_term_days, max_term_days, compounding_frequency, created_at) VALUES
+(1, 1, 5000.00, 1000000.00, 30, 1825, 'QUARTERLY', NOW()),
+(2, 2, 10000.00, 2000000.00, 30, 3650, 'QUARTERLY', NOW());
+
+-- Insert into business_rule
+INSERT INTO business_rule (id, product_id, rule_type_id, rule_value, effective_from, effective_to, created_at) VALUES
+(1, 1, 1, '{"min_balance": 5000}', '2024-01-01', NULL, NOW()),
+(2, 1, 2, '{"penalty_rate": 1.5}', '2024-01-01', NULL, NOW()),
+(3, 2, 1, '{"min_balance": 10000}', '2024-01-01', NULL, NOW()),
+(4, 2, 3, '{"max_investment": 2000000}', '2024-01-01', NULL, NOW());
+
+-- Insert into rate_matrix
+INSERT INTO rate_matrix (id, product_id, customer_type, term_from_days, term_to_days, interest_rate, effective_from, effective_to, created_at) VALUES
+(1, 1, 'RETAIL', 30, 180, 5.25, '2024-01-01', NULL, NOW()),
+(2, 1, 'RETAIL', 181, 365, 6.50, '2024-01-01', NULL, NOW()),
+(3, 1, 'RETAIL', 366, 730, 7.00, '2024-01-01', NULL, NOW()),
+(4, 2, 'CORPORATE', 30, 180, 6.00, '2024-01-01', NULL, NOW()),
+(5, 2, 'CORPORATE', 181, 365, 7.25, '2024-01-01', NULL, NOW()),
+(6, 2, 'CORPORATE', 366, 730, 7.75, '2024-01-01', NULL, NOW());
+
+-- Insert into product_audit_log
+INSERT INTO product_audit_log (id, product_id, created_by, details, action, created_at) VALUES
+(1, 1, 'admin@bank.com', '{"change": "Initial product creation"}', 'CREATE', NOW()),
+(2, 2, 'admin@bank.com', '{"change": "Initial product creation"}', 'CREATE', NOW()),
+(3, 1, 'manager@bank.com', '{"change": "Updated interest rate for 1 year+"}', 'UPDATE', NOW());
